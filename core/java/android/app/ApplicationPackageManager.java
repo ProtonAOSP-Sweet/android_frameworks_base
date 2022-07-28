@@ -753,6 +753,13 @@ public class ApplicationPackageManager extends PackageManager {
                 name.contains("PIXEL_2017_PRELOAD")) {
             return false;
         }
+
+        if (GmsCompat.isEnabled()) {
+            if (GmsHooks.isHiddenSystemFeature(name)) {
+                return false;
+            }
+        }
+
         return mHasSystemFeatureCache.query(new HasSystemFeatureQuery(name, version));
     }
 
